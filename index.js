@@ -2,7 +2,7 @@
 // where your node app starts
 
 // init project
-var os = require('node:os');
+// var os = require('node:os');
 require('dotenv').config();
 var express = require('express');
 var app = express();
@@ -27,10 +27,11 @@ app.get('/api/hello', function (req, res) {
 });
 
 app.get('/api/whoami',function (req,res){
-  let ipaddress = os.networkInterfaces()['Wi-Fi'][1].address
+  let ipaddress = req.socket.remoteAddress
   let software = req.rawHeaders['15'] //['Symbol(kHeaders)']
   let language =  req.rawHeaders['29']
   res.json({"ipaddress":ipaddress,"language":language,"software":software,})
+  console.log(ipaddress)
 })
 
 // listen for requests :)
